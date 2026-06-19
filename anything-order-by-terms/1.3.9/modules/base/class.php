@@ -1,25 +1,25 @@
 <?php
-
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
 /**
  * Base class.
+ *
  * @since 1.0
  */
 abstract class Anything_Order_Base
 {
     /**
      * ID or name of this class.
+     *
      * @since 1.0.0
+     *
      * @var string
      */
     protected $name = '';
 
     /**
      * Page now (not include '.php').
+     *
      * @since 1.0.0
+     *
      * @var string
      */
     protected $pagenow = '';
@@ -210,7 +210,7 @@ abstract class Anything_Order_Base
 	 * @return array
 	 */
 	public function add_reset_action($actions) {
-		$actions[$this->bulk_option_value] = esc_html__('Reset Order', 'anything-order-by-terms');
+		$actions[$this->bulk_option_value] = esc_html__('Reset Order', 'any-order');
 		return $actions;
 	}
 
@@ -227,7 +227,7 @@ abstract class Anything_Order_Base
 			'</a>'.
 			'<span class="title">%2$s</span>',
 			esc_url($this->get_url()),
-			esc_html__('Order', 'anything-order-by-terms')
+			esc_html__('Order', 'any-order')
 		);
 
 		return array('anything-order' => $title) + $columns;
@@ -279,35 +279,34 @@ abstract class Anything_Order_Base
 
 		$q = !is_null( $q ) ? $q : $wp_query;
 
-		if($q->tax_query!='') {
-			foreach ( $q->tax_query->queries as $key => $tax_query ) {
-				if ( 'relation' === $key ) {
-					continue;
-				}
+	    foreach ($q->tax_query->queries as $key => $tax_query) {
+	        if ('relation' === $key) {
+	            continue;
+            }
 
-				$taxonomy        = $tax_query['taxonomy'];
-				$taxonomy_object = get_taxonomy( $taxonomy );
+            $taxonomy = $tax_query['taxonomy'];
+            $taxonomy_object = get_taxonomy( $taxonomy );
 
-				// Only if term have ui. Skip language taxonomy from Polylang or product visibility from Woocommerce.
-				if ( ! $taxonomy_object || ! $taxonomy_object->show_ui ) {
-					continue;
-				}
+            // Only if term have ui. Skip language taxonomy from Polylang or product visibility from Woocommerce.
+            if (!$taxonomy_object || !$taxonomy_object->show_ui ) {
+                continue;
+            }
 
-				//We cannot define order if query more than one terms
-				if ( '' !== $term_slug || count( $tax_query['terms'] ) > 1 ) {
-					return '';
-				}
+            //We cannot define order if query more than one terms
+            if ('' !== $term_slug || count($tax_query['terms']) > 1) {
+                return '';
+            }
 
-				// Need term slug, not term id
-				if ( 'term_id' === $tax_query['field'] ) {
-					$term_id   = $tax_query['terms'][0];
-					$term      = get_term( $term_id, $taxonomy );
-					$term_slug = $term->slug;
-				} else {
-					$term_slug = $tax_query['terms'][0];
-				}
-			}
-		}
+            // Need term slug, not term id
+            if ('term_id' === $tax_query['field'] ) {
+                $term_id = $tax_query['terms'][0];
+                $term = get_term($term_id, $taxonomy);
+                $term_slug = $term->slug;
+            } else {
+                $term_slug = $tax_query['terms'][0];
+            }
+        }
+
 	    return $term_slug;
     }
 
@@ -319,7 +318,7 @@ abstract class Anything_Order_Base
      */
     public function admin_print_styles()
     {
-        wp_enqueue_style($this->get_id('style'), plugin_dir_url(__FILE__).'style.css', array(), ANYTHING_ORDER_VERSION, 'all');
+        wp_enqueue_style($this->get_id('style'), plugin_dir_url(__FILE__).'style.css', array(), false, 'all');
     }
 
     /**
@@ -331,7 +330,7 @@ abstract class Anything_Order_Base
     {
 	    global $wp_query;
 
-        wp_enqueue_script($this->get_id('script'), plugin_dir_url(__FILE__).'script.js', array('jquery-ui-sortable'), ANYTHING_ORDER_VERSION, true);
+        wp_enqueue_script($this->get_id('script'), plugin_dir_url(__FILE__).'script.js', array('jquery-ui-sortable'), false, true);
 
         $params = apply_filters("Anything_Order/ajax_params/{$this->name}", array(
             '_ajax_nonce' => wp_create_nonce("Anything_Order/update/{$this->name}"),
@@ -343,7 +342,7 @@ abstract class Anything_Order_Base
         ));
 
         $texts = array(
-            'confirmReset' => __("Are you sure you want to reset order?\n 'Cancel' to stop, 'OK' to reset.", 'anything-order-by-terms'),
+            'confirmReset' => __("Are you sure you want to reset order?\n 'Cancel' to stop, 'OK' to reset.", 'any-order'),
         );
 
         wp_localize_script($this->get_id('script'), 'anythingOrder', array(
@@ -373,7 +372,7 @@ abstract class Anything_Order_Base
         if (!$order) {
             $this->error->add(
                 'invalid_order',
-                __('Invalid ordering number is posted.', 'anything-order-by-terms')
+                __('Invalid ordering number is posted.', 'any-order')
             );
         }
 

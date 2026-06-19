@@ -1,22 +1,5 @@
 == Changelog ==
 
-= 2.0.1 - 2026-06-18 =
-* Wordpress 7.0 compability..
-* Fixed - Added proper output escaping for security (esc_html__ in wp_die)
-* Fixed - Added explicit version to enqueued scripts and styles
-* Fixed - Added direct file access protection to all module files
-* Fixed - License format
-* Fixed - Version and metadata synchronized across files
-
-= 1.4.0 - 2022-07-08 =
-* Wordpress 6.0 compability..
-
-= 1.3.10 - 2022-07-06 =
-* Fixed bug with "Woocommerce + Polylang + WP All Import" package.
-
-= 1.3.9 - 2022-04-22 =
-* Fixed - Wordpress 5.7  compatibility.
-
 = 1.3.8 - 2022-04-19 =
 * Fixed - Conflict with Wicked Folders.
 

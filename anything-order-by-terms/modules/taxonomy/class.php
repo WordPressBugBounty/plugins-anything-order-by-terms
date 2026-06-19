@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Taxonomy order.
  *
@@ -72,7 +76,7 @@ class Anything_Order_Taxonomy extends Anything_Order_Base {
 		$tax = get_taxonomy( $GLOBALS[ $this->objectnow ] );
 
 		if ( ! $tax ) {
-			wp_die( __( 'Invalid taxonomy', 'any-order' ) );
+			wp_die( esc_html__( 'Invalid taxonomy', 'anything-order-by-terms' ) );
 		}
 
 		return $tax->cap->manage_terms;

@@ -1,9 +1,5 @@
 <?php
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
 /**
  * Post order.
  *
@@ -150,7 +146,7 @@ class Anything_Order_Post extends Anything_Order_Base {
 		$post_type_object = get_post_type_object( $GLOBALS[ $this->objectnow ] );
 
 		if ( ! $post_type_object ) {
-			wp_die( esc_html__( 'Invalid post type', 'anything-order-by-terms' ) );
+			wp_die( __( 'Invalid post type', 'any-order' ) );
 		}
 
 		return $post_type_object->cap->edit_others_posts;
@@ -180,7 +176,6 @@ class Anything_Order_Post extends Anything_Order_Base {
 			$post       = get_post( $post_id );
 			$post_order = $post->menu_order;
 
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Values are safely escaped in _render_column() using absint()
 			echo $this->_render_column( $post_id, $post_order );
 		}
 	}

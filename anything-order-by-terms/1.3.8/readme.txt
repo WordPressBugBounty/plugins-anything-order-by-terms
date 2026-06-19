@@ -1,11 +1,10 @@
 === Anything Order by Terms ===
-Contributors: Briar
-Donate link: https://briar.business/donate/
+Contributors: briar
+Donate link: http://briar.fun/donate/
 Tags: admin, custom, drag and drop, menu_order, order, page, post, rearrange, reorder, sort, taxonomy, term_order
 Requires at least: 5.0
-Requires PHP: 5.6
-Tested up to: 7.0
-Stable tag: 2.0.1
+Tested up to: 5.6
+Stable tag: 1.3.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -57,15 +56,6 @@ Ctrl(or Command on OS X)+Click toggle selection state of current item. Shift+Cli
 
 
 == Changelog ==
-
-= 1.4.0 - 2022-07-08 =
-* Fixed - Wordpress 6.0  compatibility.
-
-= 1.3.10 - 2022-07-06 =
-* Fixed bug with "Woocommerce + Polylang + WP All Import" package.
-
-= 1.3.9 - 2022-04-22 =
-* Fixed - Wordpress 5.7  compatibility.
 
 = 1.3.8 - 2021-11-11 =
 * Fixed - Conflict with Wicked Folders plugin.
